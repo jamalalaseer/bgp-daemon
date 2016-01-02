@@ -1,16 +1,25 @@
 # bgp-daemon
-bgpd.pl - a bgp-daemon with additional example configs & traceiface.pl,v 1.1 2007/02/04 22:58:04 jtk Exp $
+bgpd.pl - a bgp-daemon with additional example configs 
+#
 
-Two network tools written in Perl that should run on Linux with PERL5
+& traceiface.pl,v 1.1 2007/02/04 22:58:04 jtk Exp $
+
+Two network tools
+#
 traceiface.pl - traceroute with extension to discover router egress hop address
+#
 and
+#
 bgpd.pl - a partial implementation of the BGP protocol (RFC1771) written in
 perl. It has been designed as a module to be used in other applications 
 and as tool to monitor BGP routing updates and collect all kinds of statistics.
+#
+
 Version 0.06.1+ - Minor changes by Jamal Al-Aseer 5/5/2015
 Original Version 0.06 9/27/2002
 Copyright (C)2002 Steven Hessing (steven@xs4all.nl)
 See the file LICENSE for licensing details.
+#
 
 You might have to set a PERL environment using:
 echo 'eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)' >>~/.bashrc
