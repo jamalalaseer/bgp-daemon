@@ -1,0 +1,39 @@
+bgpd.pl takes one command-line parameter related to logging:
+  --log [0|syslog|file|stdout]		
+When `0' is specified for logging or logging is not specified then only
+error & warning messages are logged (to syslog). If logging is sent to
+STDOUT then bgpd.pl does not become a daemon.
+
+In the bgpd.conf file extensive logging options are available. There are
+a number of logging classes. For each of the classes you can set a threshold
+level. If the priority of a logging message is lower or equal to the
+threshold level then the message is logged. The format is:
+  log <class> <level>
+
+The following logging classes are defined: "general", "header", "localRIB",
+"open", "update", "notification", "keepalive", "route-refresh" and "list"
+
+Each class has the followig default levels:
+"critical", "warning", "info", "parse", "session-errors", "session-warnings"
+
+Some logging classes have specific logging levels:
+  class "open":         "parse-open", "parse-open-optional"
+  class "update":       "parse-update", "parse-update-prefix",
+                        "parse-update-path-attributes"
+  class "notification": "parse-notification"
+  class "refresh":      "parse-refresh"
+  class "header":       "parse-session"
+  class "localrib":     "localrib-changes", "localrib-changes-routes",
+                        "localrib-changes-eval"
+
+Both class & level strings are case-insensitive. See the bgpd.conf.sample file
+for an example.
+
+For bgpd.pl developers:
+All messages should be logged with the log methods available from the BGP
+and BGP::Neighbor modules. They accept the following parameters:
+- type: To what kind of BGP message is the log message related
+- priority: Priority of the message
+- (array of) message string
+Please look at the BGP::Constants.pm packages to see which constants have been
+defined to aid the logging of messages.

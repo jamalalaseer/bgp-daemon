@@ -1,0 +1,72 @@
+RELEASE bgpd.pl-0.06 released on October 1st 2002
+- Fixes provided by Andrew of Supernews <andrew@supernews.net> for the 
+route selection algorithm used to select for a route announced by two or
+more peers.
+  
+RELEASE bgpd.pl-0.05 released on June 20th 2002
+- Fixes provided Andrew of Supernews <andrew@supernews.net> His coments
+included below:
+--------------------
+ - (critical) the logic of BGP::Neighbor::receive was completely wrong,
+   leading to failure of the session (and many perl warnings) any time
+   that the data returned from sysread() was shorter than expected,
+   which is something that TCP-based applications must _always_ expect
+   and handle.
+ - (annoying) router-id in the config file didn't work at all
+ - (serious) updates where the AS-PATH was present but empty (which is
+   normal for local routes from iBGP peers) were treated as though
+   the AS-PATH were missing (killing the session)
+ - (trivial) changed the dump output format to eliminate whitespace in
+   the prefix output for prefixes smaller than /10
+ - (performance) most of the time taken to take in a full routing table
+   was being eaten by BGP::Neighbor::log due to doing significant
+   processing before checking the log level. The change I did results in
+   about a 2x speedup with most logging turned off
+I also changed the logfile open to use append mode, not really a bug
+but probably more useful in most cases.
+
+Stuff I didn't fix: your daemonize function uses a method that would
+have been archaic 10 years ago, and closing stdin/out/err without
+reopening them again is a dangerous practice. Check out
+POSIX::setsid. (I'm not currently using daemon mode for various
+reasons)
+-------------------
+
+RELEASE bgpd.pl-0.04 released on December 9th 2001
+- fixed bug in AdjRibIn.pm where `!=' was used to compare packed IP addresses.
+- fixed bug Neighbor.pm where UPDATES with unfeasable routes would not
+  have their new routes processed
+- fixed bug Neighbor.pm where the closure of a BGP session would not
+  undefine the filehandle, causing errors in socket processing
+- fixed & redesigned logging 
+
+RELEASE bgpd.pl-0.03 released on June 21th 2001
+
+beta4: 
+- get rid of logging.pm, have logging functions in BGP and Neighbor modules
+
+beta3:
+- create BGP::Neighbor module, there is now a BGP::Neighbor object
+- create BGP module, there is now a BGP object
+- made PathAttribute module, there is now a PathAttribute object
+
+beta2: 
+- oob'd %conf (although it is not an object yet),
+  two new elements:$conf{adjRIBin} & $conf{localRIB}
+- added configuration file support. Neighbors need to be defined in this file
+  otherwise incoming BGP sessions are not accepted.
+- the routing table dump is now generated after a USR1 signal vs the HUP signal
+- an overview of the configured BGP sessions can be generated with SIGUSR2
+- fixed a bug where route aggregation was going a bit too automagically :-)
+
+beta1:
+- prefixes in adj-RIB-in now reference a Path Attribute hash. This
+  hash is referenced by multiple prefixes if these prefixes are send in one
+  BGP UPDATE message. This should significantly reduce memory consumption.
+
+RELEASE bgpd.pl-0.02 releases on May 2nd 2001
+
+- fixed LOCAL_PREF handling for BGP UPDATE messages 
+  (bug report by Matthias Cramer <cramer@dolphins.ch>) 
+
+RELEASE bgpd.pl-0.01 released on April 23rd 2001

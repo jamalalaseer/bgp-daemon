@@ -1,0 +1,9 @@
+- allow for interactive interface (with perl eval?)
+- incorporate newest revision of BGP RFC
+- optimize and finish route selection for local-RIB
+- add proper support for MP extensions
+- add support for BGP/MPLS VPNs
+- add support for IPv6
+
+- have a go at adding the FSM and adjRIB-out??? dunno yet. There is little
+  point in doing it but it could be fun.

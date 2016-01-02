@@ -1,0 +1,14 @@
+router bgp 65050
+  # router-id 10.0.0.1				# You can leave this out
+  # Prepare for a large amount of logging data with the settings below
+  log general session-warnings		
+  log localrib session-warnings
+  log header session-warnings
+  log open open-optional
+  log update parse-update
+  log notification session-warnings
+  log keepalive session-warnings
+  log route-refresh session-warnings
+  log list session-warnings
+  neighbor 10.0.0.2 remote-as 65051
+
