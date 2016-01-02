@@ -1,5 +1,5 @@
-# bgpd.pl - a bgp-daemon with additional example configs & traceiface.pl,v 1.1 2007/02/04 22:58:04 jtk Exp $
-
+# bgp-daemon
+bgpd.pl - a bgp-daemon with additional example configs & traceiface.pl,v 1.1 2007/02/04 22:58:04 jtk Exp $
 
 Two network tools written in Perl that should run on Linux with PERL5
 traceiface.pl - traceroute with extension to discover router egress hop address
